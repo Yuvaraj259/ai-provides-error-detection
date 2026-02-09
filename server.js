@@ -10,7 +10,8 @@ const app = express();
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
 app.use(express.json({ limit: '1mb' }));
-app.use(express.static('public'));
+// Serve static assets using an absolute path so Vercel's runtime can locate them reliably
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

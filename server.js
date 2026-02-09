@@ -67,17 +67,25 @@ app.post('/api/analyze', async (req, res) => {
       const text = await response.text();
       console.error('Gemini error status:', response.status, response.statusText);
       console.error('Gemini error body:', text);
-      
+
       // Handle rate limit specifically
       if (response.status === 429) {
-        return res.status(429).json({ 
-          error: 'Rate limit exceeded. Please wait a moment before trying again.', 
+        return res.status(429).json({
+          error: 'Rate limit exceeded. Please wait a moment before trying again.',
           details: 'Free tier limit: 20 requests per day. Try again later or upgrade your plan.',
-          isRateLimit: true 
+          isRateLimit: true,
+          status: response.status,
+          statusText: response.statusText,
         });
       }
-      
-      return res.status(502).json({ error: 'Gemini request failed', details: text });
+
+      // Return richer diagnostic info to help debug deployment/API key issues
+      return res.status(502).json({
+        error: 'Gemini request failed',
+        status: response.status,
+        statusText: response.statusText,
+        details: text?.slice ? text.slice(0, 2000) : String(text),
+      });
     }
 
     const data = await response.json();

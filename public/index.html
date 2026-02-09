@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn from your mistakes</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header Section -->
+      <header class="header">
+        <h1>Learn from your <span class="highlight">mistakes</span></h1>
+        <p class="subtitle">Paste your code, and we'll find errors, explain what went wrong in simple terms, and show you exactly how to fix them.</p>
+      </header>
+
+      <!-- Language Selection -->
+      <div class="language-selector">
+        <button class="lang-btn active" data-lang="python">
+          <i class="fab fa-python"></i>
+          Python
+        </button>
+        
+        <button class="lang-btn" data-lang="java">
+          <i class="fab fa-java"></i>
+          Java
+        </button>
+        <button class="lang-btn" data-lang="c">
+          <i class="fas fa-code"></i>
+          C
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="resetBtn" class="btn-reset">
+          <i class="fas fa-redo"></i>
+          Reset
+        </button>
+        <button id="analyzeBtn" class="btn-analyze">
+          <i class="fas fa-play"></i>
+          Analyze Code
+        </button>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="main-content">
+        <!-- Left Panel - Your Code -->
+        <div class="panel code-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-file-code"></i>
+              Your Code
+            </div>
+            <div class="current-lang" id="currentLang">Python</div>
+          </div>
+          <div class="code-editor">
+            <textarea id="code" placeholder="Write or paste your code here..." spellcheck="false"></textarea>
+            <div class="line-numbers"></div>
+          </div>
+        </div>
+
+        <!-- Right Panel - Analysis Results -->
+        <div class="panel results-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fas fa-bolt"></i>
+              Analysis Results
+            </div>
+          </div>
+          <div class="results-content" id="resultsContent">
+            <div class="placeholder">
+              <div class="placeholder-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3>Ready to Help!</h3>
+              <p>Write or paste your code, then click 'Analyze Code' to find errors and get helpful explanations.</p>
+            </div>
+          </div>
+          <div class="error-details hidden" id="errorDetails">
+            <div class="error-info">
+              <div class="info-row">
+                <span class="info-label">Error Type:</span>
+                <span class="info-value" id="errorType"></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Reason:</span>
+                <span class="info-value" id="errorReason"></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Line:</span>
+                <span class="info-value" id="errorLine"></span>
+              </div>
+              <div class="voice-controls">
+                <button id="speakBtn" class="btn-speak">
+                  <i class="fas fa-volume-up"></i>
+                  Listen to Explanation
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="corrected-code hidden" id="correctedCode">
+            <div class="corrected-header">
+              <h4>Corrected Code</h4>
+              <button id="copyBtn" class="copy-btn">
+                <i class="fas fa-copy"></i>
+                Copy
+              </button>
+            </div>
+            <pre id="fixedContent"></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Message -->
+      <div id="status" class="status-message"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
